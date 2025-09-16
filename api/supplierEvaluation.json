@@ -1,0 +1,52 @@
+{
+  "code": 0,
+  "msg": "",
+  "count": 5,
+  "data": [
+    {
+      "supplier_id": "S001",
+      "supplier_name": "宏达汽配",
+      "part_id": "P001",
+      "part_name": "刹车片",
+      "rating": "A",
+      "avg_score": 4.8,
+      "evaluation_count": 25
+    },
+    {
+      "supplier_id": "S003",
+      "supplier_name": "华美车业",
+      "part_id": "P003",
+      "part_name": "火花塞",
+      "rating": "A",
+      "avg_score": 4.5,
+      "evaluation_count": 18
+    },
+    {
+      "supplier_id": "S002",
+      "supplier_name": "顺风零件",
+      "part_id": "P004",
+      "part_name": "雨刮器",
+      "rating": "B",
+      "avg_score": 4.1,
+      "evaluation_count": 30
+    },
+    {
+      "supplier_id": "S005",
+      "supplier_name": "信德汽配",
+      "part_id": "P008",
+      "part_name": "轮胎",
+      "rating": "B",
+      "avg_score": 4.0,
+      "evaluation_count": 12
+    },
+    {
+      "supplier_id": "S004",
+      "supplier_name": "卓越配件",
+      "part_id": "P002",
+      "part_name": "空气滤清器",
+      "rating": "B",
+      "avg_score": 3.9,
+      "evaluation_count": 20
+    }
+  ]
+}

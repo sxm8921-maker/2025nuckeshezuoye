@@ -1,0 +1,97 @@
+{
+  "code": 0,
+  "msg": "",
+  "count": 10,
+  "data": [
+    {
+      "supplier_id": "S001",
+      "supplier_name": "优品汽配供应商",
+      "contact": "陈红",
+      "phone": "13800001111",
+      "address": "上海市青浦区某某路111号",
+      "rating": 3,
+      "is_blacklisted": false
+    },
+    {
+      "supplier_id": "S002",
+      "supplier_name": "新辉汽车配件有限公司",
+      "contact": "王伟",
+      "phone": "13911112222",
+      "address": "浙江省杭州市西湖区某某路222号",
+      "rating": 4,
+      "is_blacklisted": false
+    },
+    {
+      "supplier_id": "S003",
+      "supplier_name": "捷达汽配商贸",
+      "contact": "李明",
+      "phone": "13622223333",
+      "address": "广东省深圳市南山区某某路333号",
+      "rating": 2,
+      "is_blacklisted": false
+    },
+    {
+      "supplier_id": "S004",
+      "supplier_name": "博通汽车科技",
+      "contact": "林芳",
+      "phone": "18033334444",
+      "address": "北京市海淀区某某路444号",
+      "rating": 1,
+      "is_blacklisted": true
+    },
+    {
+      "supplier_id": "S005",
+      "supplier_name": "远航汽配制造",
+      "contact": "高强",
+      "phone": "15944445555",
+      "address": "江苏省苏州市工业园区某某路555号",
+      "rating": 3,
+      "is_blacklisted": false
+    },
+    {
+      "supplier_id": "S006",
+      "supplier_name": "金顺汽配商行",
+      "contact": "吴兰",
+      "phone": "13555556666",
+      "address": "湖北省武汉市洪山区某某路666号",
+      "rating": 2,
+      "is_blacklisted": false
+    },
+    {
+      "supplier_id": "S007",
+      "supplier_name": "盛世汽配供货",
+      "contact": "何俊",
+      "phone": "13766667777",
+      "address": "四川省成都市武侯区某某路777号",
+      "rating": 4,
+      "is_blacklisted": false
+    },
+    {
+      "supplier_id": "S008",
+      "supplier_name": "驰骋汽配贸易",
+      "contact": "朱丽",
+      "phone": "18977778888",
+      "address": "辽宁省沈阳市铁西区某某路888号",
+      "rating": 3,
+      "is_blacklisted": false
+    },
+    {
+      "supplier_id": "S009",
+      "supplier_name": "鸿运汽配销售",
+      "contact": "孙涛",
+      "phone": "13388889999",
+      "address": "山东省济南市历下区某某路999号",
+      "rating": 2,
+      "is_blacklisted": false
+    },
+    {
+      "supplier_id": "S010",
+      "supplier_name": "德信汽配供应",
+      "contact": "刘静",
+      "phone": "15099990000",
+      "address": "福建省厦门市思明区某某路1010号",
+      "rating": 4,
+      "is_blacklisted": false
+    }
+  ]
+}

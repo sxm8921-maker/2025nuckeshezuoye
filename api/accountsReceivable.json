@@ -1,0 +1,55 @@
+{
+  "code": 0,
+  "msg": "",
+  "count": 10,
+  "data": [
+    {
+      "order_id": "SO20250916001",
+      "customer_name": "王先生",
+      "total_amount": 5000.00,
+      "received_amount": 3000.00,
+      "remaining_amount": 2000.00,
+      "due_date": "2025-09-20"
+    },
+    {
+      "order_id": "SO20250915002",
+      "customer_name": "李女士",
+      "total_amount": 2500.00,
+      "received_amount": 2500.00,
+      "remaining_amount": 0.00,
+      "due_date": "2025-09-15"
+    },
+    {
+      "order_id": "SO20250914003",
+      "customer_name": "张先生",
+      "total_amount": 1200.00,
+      "received_amount": 0.00,
+      "remaining_amount": 1200.00,
+      "due_date": "2025-09-10"
+    },
+    {
+      "order_id": "SO20250913004",
+      "customer_name": "王先生",
+      "total_amount": 8000.00,
+      "received_amount": 8000.00,
+      "remaining_amount": 0.00,
+      "due_date": "2025-09-08"
+    },
+    {
+      "order_id": "SO20250912005",
+      "customer_name": "赵女士",
+      "total_amount": 650.00,
+      "received_amount": 0.00,
+      "remaining_amount": 650.00,
+      "due_date": "2025-09-17"
+    },
+    {
+      "order_id": "SO20250911006",
+      "customer_name": "钱先生",
+      "total_amount": 4200.00,
+      "received_amount": 2000.00,
+      "remaining_amount": 2200.00,
+      "due_date": "2025-09-15"
+    }
+  ]
+}

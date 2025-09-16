@@ -1,0 +1,77 @@
+{
+  "code": 0,
+  "msg": "",
+  "count": 10,
+  "data": [
+    {
+      "part_id": "P001",
+      "part_name": "刹车片",
+      "quantity": 100,
+      "location": "A-01-01",
+      "unit": "套"
+    },
+    {
+      "part_id": "P002",
+      "part_name": "空气滤清器",
+      "quantity": 150,
+      "location": "A-01-02",
+      "unit": "个"
+    },
+    {
+      "part_id": "P003",
+      "part_name": "火花塞",
+      "quantity": 200,
+      "location": "A-02-01",
+      "unit": "个"
+    },
+    {
+      "part_id": "P004",
+      "part_name": "雨刮器",
+      "quantity": 80,
+      "location": "B-01-01",
+      "unit": "对"
+    },
+    {
+      "part_id": "P005",
+      "part_name": "机油滤清器",
+      "quantity": 120,
+      "location": "A-02-02",
+      "unit": "个"
+    },
+    {
+      "part_id": "P006",
+      "part_name": "电池",
+      "quantity": 50,
+      "location": "C-01-01",
+      "unit": "个"
+    },
+    {
+      "part_id": "P007",
+      "part_name": "减震器",
+      "quantity": 60,
+      "location": "B-01-02",
+      "unit": "套"
+    },
+    {
+      "part_id": "P008",
+      "part_name": "轮胎",
+      "quantity": 40,
+      "location": "C-02-01",
+      "unit": "条"
+    },
+    {
+      "part_id": "P009",
+      "part_name": "空调滤芯",
+      "quantity": 180,
+      "location": "A-03-01",
+      "unit": "个"
+    },
+    {
+      "part_id": "P010",
+      "part_name": "水箱",
+      "quantity": 30,
+      "location": "D-01-01",
+      "unit": "个"
+    }
+  ]
+}

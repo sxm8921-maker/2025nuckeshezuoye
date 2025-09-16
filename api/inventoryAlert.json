@@ -1,0 +1,47 @@
+{
+  "code": 0,
+  "msg": "",
+  "count": 10,
+  "data": [
+    {
+      "part_id": "P001",
+      "part_name": "刹车片",
+      "current_quantity": 10,
+      "safe_stock_level": 20,
+      "alert_level": "紧急",
+      "remarks": "库存数量过低，急需采购"
+    },
+    {
+      "part_id": "P004",
+      "part_name": "雨刮器",
+      "current_quantity": 25,
+      "safe_stock_level": 30,
+      "alert_level": "警告",
+      "remarks": "库存数量接近安全库存线"
+    },
+    {
+      "part_id": "P006",
+      "part_name": "电池",
+      "current_quantity": 5,
+      "safe_stock_level": 15,
+      "alert_level": "紧急",
+      "remarks": "库存数量严重不足"
+    },
+    {
+      "part_id": "P008",
+      "part_name": "轮胎",
+      "current_quantity": 15,
+      "safe_stock_level": 20,
+      "alert_level": "警告",
+      "remarks": "库存数量接近安全库存线"
+    },
+    {
+      "part_id": "P010",
+      "part_name": "水箱",
+      "current_quantity": 5,
+      "safe_stock_level": 10,
+      "alert_level": "紧急",
+      "remarks": "库存数量过低，急需采购"
+    }
+  ]
+}

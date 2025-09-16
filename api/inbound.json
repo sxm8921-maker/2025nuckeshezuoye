@@ -1,0 +1,107 @@
+{
+  "code": 0,
+  "msg": "",
+  "count": 10,
+  "data": [
+    {
+      "inbound_id": "IN20250916001",
+      "part_id": "P001",
+      "part_name": "刹车片",
+      "quantity": 50,
+      "supplier": "优品汽配供应商",
+      "inbound_person": "张三",
+      "inbound_date": "2025-09-16",
+      "remarks": "正常入库"
+    },
+    {
+      "inbound_id": "IN20250915002",
+      "part_id": "P004",
+      "part_name": "雨刮器",
+      "quantity": 30,
+      "supplier": "博通汽车科技",
+      "inbound_person": "李四",
+      "inbound_date": "2025-09-15",
+      "remarks": "正常入库"
+    },
+    {
+      "inbound_id": "IN20250914003",
+      "part_id": "P007",
+      "part_name": "减震器",
+      "quantity": 25,
+      "supplier": "远航汽配制造",
+      "inbound_person": "王五",
+      "inbound_date": "2025-09-14",
+      "remarks": "新供应商首批入库"
+    },
+    {
+      "inbound_id": "IN20250913004",
+      "part_id": "P002",
+      "part_name": "空气滤清器",
+      "quantity": 60,
+      "supplier": "新辉汽车配件有限公司",
+      "inbound_person": "张三",
+      "inbound_date": "2025-09-13",
+      "remarks": ""
+    },
+    {
+      "inbound_id": "IN20250912005",
+      "part_id": "P005",
+      "part_name": "机油滤清器",
+      "quantity": 40,
+      "supplier": "优品汽配供应商",
+      "inbound_person": "李四",
+      "inbound_date": "2025-09-12",
+      "remarks": "正常入库"
+    },
+    {
+      "inbound_id": "IN20250911006",
+      "part_id": "P008",
+      "part_name": "轮胎",
+      "quantity": 10,
+      "supplier": "驰骋汽配贸易",
+      "inbound_person": "王五",
+      "inbound_date": "2025-09-11",
+      "remarks": "急单入库"
+    },
+    {
+      "inbound_id": "IN20250910007",
+      "part_id": "P003",
+      "part_name": "火花塞",
+      "quantity": 75,
+      "supplier": "捷达汽配商贸",
+      "inbound_person": "张三",
+      "inbound_date": "2025-09-10",
+      "remarks": ""
+    },
+    {
+      "inbound_id": "IN20250909008",
+      "part_id": "P006",
+      "part_name": "电池",
+      "quantity": 20,
+      "supplier": "金顺汽配商行",
+      "inbound_person": "李四",
+      "inbound_date": "2025-09-09",
+      "remarks": "正常入库"
+    },
+    {
+      "inbound_id": "IN20250908009",
+      "part_id": "P009",
+      "part_name": "空调滤芯",
+      "quantity": 90,
+      "supplier": "盛世汽配供货",
+      "inbound_person": "王五",
+      "inbound_date": "2025-09-08",
+      "remarks": ""
+    },
+    {
+      "inbound_id": "IN20250907010",
+      "part_id": "P010",
+      "part_name": "水箱",
+      "quantity": 15,
+      "supplier": "德信汽配供应",
+      "inbound_person": "张三",
+      "inbound_date": "2025-09-07",
+      "remarks": "正常入库"
+    }
+  ]
+}

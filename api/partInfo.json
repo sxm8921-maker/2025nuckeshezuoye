@@ -1,0 +1,87 @@
+{
+  "code": 0,
+  "msg": "",
+  "count": 10,
+  "data": [
+    {
+      "part_id": "P001",
+      "part_name": "刹车片",
+      "category": "制动系统",
+      "car_model": "大众途观L",
+      "warranty": "2年",
+      "image": "../../images/part1.png"
+    },
+    {
+      "part_id": "P002",
+      "part_name": "空气滤清器",
+      "category": "发动机系统",
+      "car_model": "本田思域",
+      "warranty": "1年",
+      "image": "../../images/part2.png"
+    },
+    {
+      "part_id": "P003",
+      "part_name": "火花塞",
+      "category": "点火系统",
+      "car_model": "丰田卡罗拉",
+      "warranty": "3年",
+      "image": "../../images/part3.png"
+    },
+    {
+      "part_id": "P004",
+      "part_name": "雨刮器",
+      "category": "车身附件",
+      "car_model": "所有",
+      "warranty": "6个月",
+      "image": "../../images/part4.png"
+    },
+    {
+      "part_id": "P005",
+      "part_name": "机油滤清器",
+      "category": "润滑系统",
+      "car_model": "大众帕萨特",
+      "warranty": "1年",
+      "image": "../../images/part5.png"
+    },
+    {
+      "part_id": "P006",
+      "part_name": "电池",
+      "category": "电气系统",
+      "car_model": "特斯拉Model Y",
+      "warranty": "5年",
+      "image": "../../images/part6.png"
+    },
+    {
+      "part_id": "P007",
+      "part_name": "减震器",
+      "category": "悬挂系统",
+      "car_model": "宝马3系",
+      "warranty": "2年",
+      "image": "../../images/part7.png"
+    },
+    {
+      "part_id": "P008",
+      "part_name": "轮胎",
+      "category": "车轮系统",
+      "car_model": "奥迪A6L",
+      "warranty": "3年",
+      "image": "../../images/part8.png"
+    },
+    {
+      "part_id": "P009",
+      "part_name": "空调滤芯",
+      "category": "空调系统",
+      "car_model": "奔驰C级",
+      "warranty": "1年",
+      "image": "../../images/part9.png"
+    },
+    {
+      "part_id": "P010",
+      "part_name": "水箱",
+      "category": "冷却系统",
+      "car_model": "福特蒙迪欧",
+      "warranty": "3年",
+      "image": "../../images/part10.png"
+    }
+  ]
+}

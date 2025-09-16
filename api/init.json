@@ -1,0 +1,233 @@
+{
+  "homeInfo": {
+    "title": "系统首页",
+    "href": "page/home.html"
+  },
+  "logoInfo": {
+    "title": "汽管严",
+    "image": "images/meta-color.png",
+    "href": ""
+  },
+  "menuInfo": [
+    {
+      "title": "常规管理",
+      "icon": "fa fa-address-book",
+      "href": "",
+      "target": "_self",
+      "child": [
+        {
+          "title": "基础信息管理",
+          "icon": "fa fa-database",
+          "href": "",
+          "target": "_self",
+          "child": [
+            {
+              "title": "零件信息管理",
+              "href": "page/baseinfo/partInfo.html",
+              "icon": "fa fa-cogs",
+              "target": "_self"
+            },
+            {
+              "title": "客户信息管理",
+              "href": "page/baseinfo/customerInfo.html",
+              "icon": "fa fa-users",
+              "target": "_self"
+            },
+            {
+              "title": "供应商信息管理",
+              "href": "page/baseinfo/supplierInfo.html",
+              "icon": "fa fa-truck",
+              "target": "_self"
+            }
+          ]
+        },
+        {
+          "title": "库存管理",
+          "icon": "fa fa-cube",
+          "href": "",
+          "target": "_self",
+          "child": [
+            {
+              "title": "库存初始化",
+              "href": "page/inventory/inventoryInit.html",
+              "icon": "fa fa-plus-square",
+              "target": "_self"
+            },
+            {
+              "title": "库存日常管理",
+              "href": "page/inventory/dailyInventory.html",
+              "icon": "fa fa-calendar",
+              "target": "_self"
+            },
+           {
+              "title": "库存盘点",
+              "href": "page/inventory/inventoryCount.html",
+              "icon": "fa fa-check-square-o",
+              "target": "_self"
+            },
+            {
+              "title": "出库管理",
+              "href": "page/inventory/outbound.html",
+              "icon": "fa fa-upload",
+              "target": "_self"
+            },
+			{
+			  "title": "入库管理",
+			  "href": "page/inventory/inbound.html",
+			  "icon": "fa fa-download",
+			  "target": "_self"
+			},
+            {
+              "title": "库存预警",
+              "href": "page/inventory/inventoryAlert.html",
+              "icon": "fa fa-bell",
+              "target": "_self"
+            }
+          ]
+        },
+        {
+          "title": "销售管理",
+          "icon": "fa fa-shopping-cart",
+          "href": "",
+          "target": "_self",
+          "child": [
+            {
+              "title": "销售订单管理",
+              "href": "page/sales/salesOrder.html",
+              "icon": "fa fa-file-text-o",
+              "target": "_self"
+            },
+            {
+              "title": "报价管理",
+              "href": "page/sales/quote.html",
+              "icon": "fa fa-tags",
+              "target": "_self"
+            },
+            {
+              "title": "销售退货管理",
+              "href": "page/sales/salesReturn.html",
+              "icon": "fa fa-undo",
+              "target": "_self"
+            }
+          ]
+        },
+        {
+          "title": "采购管理",
+          "icon": "fa fa-truck",
+          "href": "",
+          "target": "_self",
+          "child": [
+            {
+              "title": "采购计划管理",
+              "href": "page/purchase/purchasePlan.html",
+              "icon": "fa fa-list-alt",
+              "target": "_self"
+            },
+            {
+              "title": "供应商选择与评估",
+              "href": "page/purchase/supplierEvaluation.html",
+              "icon": "fa fa-star",
+              "target": "_self"
+            },
+            {
+              "title": "采购订单管理",
+              "href": "page/purchase/purchaseOrder.html",
+              "icon": "fa fa-sticky-note-o",
+              "target": "_self"
+            },
+            {
+              "title": "采购收货管理",
+              "href": "page/purchase/purchaseReceiving.html",
+              "icon": "fa fa-check-square",
+              "target": "_self"
+            }
+          ]
+        },
+        {
+          "title": "财务管理",
+          "icon": "fa fa-money",
+          "href": "",
+          "target": "_self",
+          "child": [
+            {
+              "title": "应收账款管理",
+              "href": "page/finance/accountsReceivable.html",
+              "icon": "fa fa-credit-card",
+              "target": "_self"
+            },
+            {
+              "title": "应付账款管理",
+              "href": "page/finance/accountsPayable.html",
+              "icon": "fa fa-credit-card-alt",
+              "target": "_self"
+            },
+            {
+              "title": "收支明细管理",
+              "href": "page/finance/transactionDetails.html",
+              "icon": "fa fa-list",
+              "target": "_self"
+            },
+            {
+              "title": "财务报表生成",
+              "href": "page/finance/financialReports.html",
+              "icon": "fa fa-bar-chart",
+              "target": "_self"
+            }
+          ]
+        },
+        {
+          "title": "用户与权限管理",
+          "icon": "fa fa-shield",
+          "href": "",
+          "target": "_self",
+          "child": [
+            {
+              "title": "用户管理",
+              "href": "page/system/user.html",
+              "icon": "fa fa-user",
+              "target": "_self"
+            },
+            {
+              "title": "角色管理",
+              "href": "page/system/role.html",
+              "icon": "fa fa-user-circle-o",
+              "target": "_self"
+            },
+            {
+              "title": "权限分配",
+              "href": "page/system/permission.html",
+              "icon": "fa fa-handshake-o",
+              "target": "_self"
+            },
+            {
+              "title": "密码与安全设置",
+              "href": "page/system/password.html",
+              "icon": "fa fa-lock",
+              "target": "_self"
+            }
+          ]
+        },
+        {
+          "title": "系统维护与统计分析",
+          "icon": "fa fa-cogs",
+          "href": "",
+          "target": "_self",
+          "child": [
+            {
+              "title": "系统维护",
+              "href": "page/maintenance/maintenance.html",
+              "icon": "fa fa-wrench",
+              "target": "_self"
+            },
+            {
+              "title": "综合统计分析",
+              "href": "page/maintenance/analysis.html",
+              "icon": "fa fa-line-chart",
+              "target": "_self"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

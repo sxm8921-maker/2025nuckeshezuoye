@@ -1,0 +1,55 @@
+{
+  "code": 0,
+  "msg": "",
+  "count": 10,
+  "data": [
+    {
+      "order_id": "PO20250916001",
+      "supplier_name": "宏达汽配",
+      "total_amount": 15000.00,
+      "paid_amount": 0.00,
+      "remaining_amount": 15000.00,
+      "due_date": "2025-09-20"
+    },
+    {
+      "order_id": "PO20250915002",
+      "supplier_name": "华美车业",
+      "total_amount": 1000.00,
+      "paid_amount": 500.00,
+      "remaining_amount": 500.00,
+      "due_date": "2025-09-25"
+    },
+    {
+      "order_id": "PO20250914003",
+      "supplier_name": "卓越配件",
+      "total_amount": 5000.00,
+      "paid_amount": 5000.00,
+      "remaining_amount": 0.00,
+      "due_date": "2025-09-14"
+    },
+    {
+      "order_id": "PO20250913004",
+      "supplier_name": "信德汽配",
+      "total_amount": 3000.00,
+      "paid_amount": 3000.00,
+      "remaining_amount": 0.00,
+      "due_date": "2025-09-13"
+    },
+    {
+      "order_id": "PO20250912005",
+      "supplier_name": "顺风零件",
+      "total_amount": 6000.00,
+      "paid_amount": 0.00,
+      "remaining_amount": 6000.00,
+      "due_date": "2025-09-22"
+    },
+    {
+      "order_id": "PO20250911006",
+      "supplier_name": "华美车业",
+      "total_amount": 5000.00,
+      "paid_amount": 5000.00,
+      "remaining_amount": 0.00,
+      "due_date": "2025-09-11"
+    }
+  ]
+}

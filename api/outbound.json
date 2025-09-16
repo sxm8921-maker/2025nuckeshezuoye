@@ -1,0 +1,107 @@
+{
+  "code": 0,
+  "msg": "",
+  "count": 10,
+  "data": [
+    {
+      "outbound_id": "OU20250916001",
+      "part_id": "P001",
+      "part_name": "刹车片",
+      "quantity": 5,
+      "customer": "王先生",
+      "outbound_person": "李四",
+      "outbound_date": "2025-09-16",
+      "remarks": "客户自提"
+    },
+    {
+      "outbound_id": "OU20250915002",
+      "part_id": "P004",
+      "part_name": "雨刮器",
+      "quantity": 2,
+      "customer": "刘女士",
+      "outbound_person": "张三",
+      "outbound_date": "2025-09-15",
+      "remarks": ""
+    },
+    {
+      "outbound_id": "OU20250914003",
+      "part_id": "P002",
+      "part_name": "空气滤清器",
+      "quantity": 10,
+      "customer": "赵先生",
+      "outbound_person": "王五",
+      "outbound_date": "2025-09-14",
+      "remarks": "物流发货"
+    },
+    {
+      "outbound_id": "OU20250913004",
+      "part_id": "P005",
+      "part_name": "机油滤清器",
+      "quantity": 8,
+      "customer": "孙先生",
+      "outbound_person": "李四",
+      "outbound_date": "2025-09-13",
+      "remarks": "销售订单号：SO-12345"
+    },
+    {
+      "outbound_id": "OU20250912005",
+      "part_id": "P008",
+      "part_name": "轮胎",
+      "quantity": 4,
+      "customer": "张小姐",
+      "outbound_person": "张三",
+      "outbound_date": "2025-09-12",
+      "remarks": "正常出库"
+    },
+    {
+      "outbound_id": "OU20250911006",
+      "part_id": "P006",
+      "part_name": "电池",
+      "quantity": 1,
+      "customer": "李先生",
+      "outbound_person": "王五",
+      "outbound_date": "2025-09-11",
+      "remarks": "急件出库"
+    },
+    {
+      "outbound_id": "OU20250910007",
+      "part_id": "P003",
+      "part_name": "火花塞",
+      "quantity": 15,
+      "customer": "周先生",
+      "outbound_person": "李四",
+      "outbound_date": "2025-09-10",
+      "remarks": ""
+    },
+    {
+      "outbound_id": "OU20250909008",
+      "part_id": "P009",
+      "part_name": "空调滤芯",
+      "quantity": 20,
+      "customer": "吴先生",
+      "outbound_person": "张三",
+      "outbound_date": "2025-09-09",
+      "remarks": "正常出库"
+    },
+    {
+      "outbound_id": "OU20250908009",
+      "part_id": "P007",
+      "part_name": "减震器",
+      "quantity": 3,
+      "customer": "郑先生",
+      "outbound_person": "王五",
+      "outbound_date": "2025-09-08",
+      "remarks": ""
+    },
+    {
+      "outbound_id": "OU20250907010",
+      "part_id": "P010",
+      "part_name": "水箱",
+      "quantity": 2,
+      "customer": "冯先生",
+      "outbound_person": "李四",
+      "outbound_date": "2025-09-07",
+      "remarks": "客户急需"
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "code": 0,
+  "msg": "",
+  "count": 10,
+  "data": [
+    {
+      "transaction_id": "INC20250916001",
+      "date": "2025-09-16",
+      "type": "收入",
+      "amount": 5000.00,
+      "remark": "销售订单SO20250916001收款",
+      "voucher": "http://example.com/voucher1.jpg"
+    },
+    {
+      "transaction_id": "EXP20250916002",
+      "date": "2025-09-16",
+      "type": "支出",
+      "amount": 200.00,
+      "remark": "办公用品采购",
+      "voucher": "http://example.com/voucher2.png"
+    },
+    {
+      "transaction_id": "INC20250915003",
+      "date": "2025-09-15",
+      "type": "收入",
+      "amount": 2500.00,
+      "remark": "销售订单SO20250915002收款",
+      "voucher": "http://example.com/voucher3.jpg"
+    },
+    {
+      "transaction_id": "EXP20250914004",
+      "date": "2025-09-14",
+      "type": "支出",
+      "amount": 15000.00,
+      "remark": "采购订单PO20250914003付款",
+      "voucher": "http://example.com/voucher4.jpg"
+    },
+    {
+      "transaction_id": "INC20250914005",
+      "date": "2025-09-14",
+      "type": "收入",
+      "amount": 1200.00,
+      "remark": "销售订单SO20250914003收款",
+      "voucher": ""
+    },
+    {
+      "transaction_id": "EXP20250913006",
+      "date": "2025-09-13",
+      "type": "支出",
+      "amount": 5000.00,
+      "remark": "日常运维费用",
+      "voucher": "http://example.com/voucher5.png"
+    }
+  ]
+}

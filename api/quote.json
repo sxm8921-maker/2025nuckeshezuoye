@@ -1,0 +1,91 @@
+{
+  "code": 0,
+  "msg": "",
+  "count": 10,
+  "data": [
+    {
+      "quote_id": "QU20250916001",
+      "customer_name": "王先生",
+      "quote_date": "2025-09-16",
+      "validity_date": "2025-10-16",
+      "part_id": "P001",
+      "part_name": "刹车片",
+      "quantity": 5,
+      "price": 150,
+      "total_price": 750,
+      "quote_status": "已接受"
+    },
+    {
+      "quote_id": "QU20250915002",
+      "customer_name": "刘女士",
+      "quote_date": "2025-09-15",
+      "validity_date": "2025-10-15",
+      "part_id": "P004",
+      "part_name": "雨刮器",
+      "quantity": 2,
+      "price": 50,
+      "total_price": 100,
+      "quote_status": "已接受"
+    },
+    {
+      "quote_id": "QU20250914003",
+      "customer_name": "赵先生",
+      "quote_date": "2025-09-14",
+      "validity_date": "2025-10-14",
+      "part_id": "P002",
+      "part_name": "空气滤清器",
+      "quantity": 10,
+      "price": 25,
+      "total_price": 250,
+      "quote_status": "待反馈"
+    },
+    {
+      "quote_id": "QU20250913004",
+      "customer_name": "孙先生",
+      "quote_date": "2025-09-13",
+      "validity_date": "2025-10-13",
+      "part_id": "P005",
+      "part_name": "机油滤清器",
+      "quantity": 8,
+      "price": 20,
+      "total_price": 160,
+      "quote_status": "已拒绝"
+    },
+    {
+      "quote_id": "QU20250912005",
+      "customer_name": "张小姐",
+      "quote_date": "2025-09-12",
+      "validity_date": "2025-10-12",
+      "part_id": "P008",
+      "part_name": "轮胎",
+      "quantity": 4,
+      "price": 300,
+      "total_price": 1200,
+      "quote_status": "待反馈"
+    },
+    {
+      "quote_id": "QU20250911006",
+      "customer_name": "李先生",
+      "quote_date": "2025-09-11",
+      "validity_date": "2025-10-11",
+      "part_id": "P006",
+      "part_name": "电池",
+      "quantity": 1,
+      "price": 500,
+      "total_price": 500,
+      "quote_status": "已过期"
+    },
+    {
+      "quote_id": "QU20250910007",
+      "customer_name": "周先生",
+      "quote_date": "2025-09-10",
+      "validity_date": "2025-10-10",
+      "part_id": "P003",
+      "part_name": "火花塞",
+      "quantity": 15,
+      "price": 20,
+      "total_price": 300,
+      "quote_status": "已接受"
+    }
+  ]
+}

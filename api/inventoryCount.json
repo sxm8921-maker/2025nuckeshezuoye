@@ -1,0 +1,107 @@
+{
+  "code": 0,
+  "msg": "",
+  "count": 10,
+  "data": [
+    {
+      "part_id": "P001",
+      "part_name": "刹车片",
+      "count_quantity": 98,
+      "current_quantity": 100,
+      "difference": -2,
+      "counter": "张三",
+      "count_date": "2025-09-15",
+      "remarks": "有2套零件包装破损"
+    },
+    {
+      "part_id": "P002",
+      "part_name": "空气滤清器",
+      "count_quantity": 150,
+      "current_quantity": 150,
+      "difference": 0,
+      "counter": "李四",
+      "count_date": "2025-09-15",
+      "remarks": "正常"
+    },
+    {
+      "part_id": "P003",
+      "part_name": "火花塞",
+      "count_quantity": 205,
+      "current_quantity": 200,
+      "difference": 5,
+      "counter": "王五",
+      "count_date": "2025-09-14",
+      "remarks": "发现5个额外库存"
+    },
+    {
+      "part_id": "P004",
+      "part_name": "雨刮器",
+      "count_quantity": 80,
+      "current_quantity": 80,
+      "difference": 0,
+      "counter": "张三",
+      "count_date": "2025-09-14",
+      "remarks": "正常"
+    },
+    {
+      "part_id": "P005",
+      "part_name": "机油滤清器",
+      "count_quantity": 118,
+      "current_quantity": 120,
+      "difference": -2,
+      "counter": "李四",
+      "count_date": "2025-09-13",
+      "remarks": "丢失2个"
+    },
+    {
+      "part_id": "P006",
+      "part_name": "电池",
+      "count_quantity": 50,
+      "current_quantity": 50,
+      "difference": 0,
+      "counter": "王五",
+      "count_date": "2025-09-13",
+      "remarks": "正常"
+    },
+    {
+      "part_id": "P007",
+      "part_name": "减震器",
+      "count_quantity": 60,
+      "current_quantity": 60,
+      "difference": 0,
+      "counter": "张三",
+      "count_date": "2025-09-12",
+      "remarks": "正常"
+    },
+    {
+      "part_id": "P008",
+      "part_name": "轮胎",
+      "count_quantity": 40,
+      "current_quantity": 40,
+      "difference": 0,
+      "counter": "李四",
+      "count_date": "2025-09-12",
+      "remarks": "正常"
+    },
+    {
+      "part_id": "P009",
+      "part_name": "空调滤芯",
+      "count_quantity": 182,
+      "current_quantity": 180,
+      "difference": 2,
+      "counter": "王五",
+      "count_date": "2025-09-11",
+      "remarks": "发现2个额外库存"
+    },
+    {
+      "part_id": "P010",
+      "part_name": "水箱",
+      "count_quantity": 29,
+      "current_quantity": 30,
+      "difference": -1,
+      "counter": "张三",
+      "count_date": "2025-09-11",
+      "remarks": "1个零件破损"
+    }
+  ]
+}

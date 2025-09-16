@@ -1,0 +1,67 @@
+{
+  "code": 0,
+  "msg": "",
+  "count": 10,
+  "data": [
+    {
+      "receiving_id": "PR20250916001",
+      "purchase_order_id": "PO20250916001",
+      "receiving_date": "2025-09-16",
+      "part_name": "刹车片",
+      "quantity": 100,
+      "inspection_result": "合格",
+      "inbound_id": "IN20250916001",
+      "processing_method": ""
+    },
+    {
+      "receiving_id": "PR20250915002",
+      "purchase_order_id": "PO20250915002",
+      "receiving_date": "2025-09-15",
+      "part_name": "火花塞",
+      "quantity": 50,
+      "inspection_result": "合格",
+      "inbound_id": "IN20250915002",
+      "processing_method": ""
+    },
+    {
+      "receiving_id": "PR20250914003",
+      "purchase_order_id": "PO20250914003",
+      "receiving_date": "2025-09-14",
+      "part_name": "空气滤清器",
+      "quantity": 200,
+      "inspection_result": "合格",
+      "inbound_id": "IN20250914003",
+      "processing_method": ""
+    },
+    {
+      "receiving_id": "PR20250913004",
+      "purchase_order_id": "PO20250913004",
+      "receiving_date": "2025-09-13",
+      "part_name": "机油滤清器",
+      "quantity": 150,
+      "inspection_result": "合格",
+      "inbound_id": "IN20250913004",
+      "processing_method": ""
+    },
+    {
+      "receiving_id": "PR20250912005",
+      "purchase_order_id": "PO20250912005",
+      "receiving_date": "2025-09-12",
+      "part_name": "轮胎",
+      "quantity": 1,
+      "inspection_result": "不合格",
+      "inbound_id": "",
+      "processing_method": "退货"
+    },
+    {
+      "receiving_id": "PR20250911006",
+      "purchase_order_id": "PO20250911006",
+      "receiving_date": "2025-09-11",
+      "part_name": "电池",
+      "quantity": 10,
+      "inspection_result": "合格",
+      "inbound_id": "IN20250911006",
+      "processing_method": ""
+    }
+  ]
+}

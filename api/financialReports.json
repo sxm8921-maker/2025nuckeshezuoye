@@ -1,0 +1,52 @@
+{
+  "code": 0,
+  "msg": "",
+  "count": 5,
+  "data": [
+    {
+      "id": 1001,
+      "report_name": "2024年第一季度资产负债表",
+      "report_date": "2024-04-10",
+      "report_type": "资产负债表",
+      "creator": "财务部-李明",
+      "status": "已归档",
+      "download_url": "/reports/2024Q1_balance_sheet.pdf"
+    },
+    {
+      "id": 1002,
+      "report_name": "2024年4月利润表",
+      "report_date": "2024-05-05",
+      "report_type": "利润表",
+      "creator": "财务部-李明",
+      "status": "已归档",
+      "download_url": "/reports/2024-04_income_statement.pdf"
+    },
+    {
+      "id": 1003,
+      "report_name": "2024年上半年现金流量表",
+      "report_date": "2024-07-20",
+      "report_type": "现金流量表",
+      "creator": "财务部-王芳",
+      "status": "草稿",
+      "download_url": ""
+    },
+    {
+      "id": 1004,
+      "report_name": "2024年第二季度利润表",
+      "report_date": "2024-07-15",
+      "report_type": "利润表",
+      "creator": "财务部-李明",
+      "status": "已归档",
+      "download_url": "/reports/2024Q2_income_statement.pdf"
+    },
+    {
+      "id": 1005,
+      "report_name": "2024年8月资产负债表",
+      "report_date": "2024-09-01",
+      "report_type": "资产负债表",
+      "creator": "财务部-王芳",
+      "status": "已归档",
+      "download_url": "/reports/2024-08_balance_sheet.pdf"
+    }
+  ]
+}

@@ -1,0 +1,77 @@
+{
+  "code": 0,
+  "msg": "",
+  "count": 10,
+  "data": [
+    {
+      "return_id": "SR20250916001",
+      "original_order_id": "SO20250916001",
+      "part_id": "P001",
+      "part_name": "刹车片",
+      "quantity": 1,
+      "return_reason": "质量问题",
+      "return_date": "2025-09-16",
+      "status": "已处理"
+    },
+    {
+      "return_id": "SR20250915002",
+      "original_order_id": "SO20250915002",
+      "part_id": "P004",
+      "part_name": "雨刮器",
+      "quantity": 1,
+      "return_reason": "型号错误",
+      "return_date": "2025-09-15",
+      "status": "已处理"
+    },
+    {
+      "return_id": "SR20250914003",
+      "original_order_id": "SO20250914003",
+      "part_id": "P002",
+      "part_name": "空气滤清器",
+      "quantity": 2,
+      "return_reason": "其他",
+      "return_date": "2025-09-14",
+      "status": "待审核"
+    },
+    {
+      "return_id": "SR20250913004",
+      "original_order_id": "SO20250913004",
+      "part_id": "P005",
+      "part_name": "机油滤清器",
+      "quantity": 1,
+      "return_reason": "质量问题",
+      "return_date": "2025-09-13",
+      "status": "已处理"
+    },
+    {
+      "return_id": "SR20250912005",
+      "original_order_id": "SO20250912005",
+      "part_id": "P008",
+      "part_name": "轮胎",
+      "quantity": 1,
+      "return_reason": "型号错误",
+      "return_date": "2025-09-12",
+      "status": "已处理"
+    },
+    {
+      "return_id": "SR20250911006",
+      "original_order_id": "SO20250911006",
+      "part_id": "P006",
+      "part_name": "电池",
+      "quantity": 1,
+      "return_reason": "其他",
+      "return_date": "2025-09-11",
+      "status": "已处理"
+    },
+    {
+      "return_id": "SR20250910007",
+      "original_order_id": "SO20250910007",
+      "part_id": "P003",
+      "part_name": "火花塞",
+      "quantity": 1,
+      "return_reason": "质量问题",
+      "return_date": "2025-09-10",
+      "status": "已处理"
+    }
+  ]
+}

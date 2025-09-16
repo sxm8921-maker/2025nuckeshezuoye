@@ -1,0 +1,117 @@
+{
+  "code": 0,
+  "msg": "",
+  "count": 10,
+  "data": [
+    {
+      "order_id": "SO20250916001",
+      "customer_name": "王先生",
+      "order_date": "2025-09-16",
+      "part_id": "P001",
+      "part_name": "刹车片",
+      "quantity": 5,
+      "total_price": 750,
+      "order_status": "已出库",
+      "remarks": "正常订单"
+    },
+    {
+      "order_id": "SO20250915002",
+      "customer_name": "刘女士",
+      "order_date": "2025-09-15",
+      "part_id": "P004",
+      "part_name": "雨刮器",
+      "quantity": 2,
+      "total_price": 100,
+      "order_status": "已出库",
+      "remarks": ""
+    },
+    {
+      "order_id": "SO20250914003",
+      "customer_name": "赵先生",
+      "order_date": "2025-09-14",
+      "part_id": "P002",
+      "part_name": "空气滤清器",
+      "quantity": 10,
+      "total_price": 250,
+      "order_status": "待出库",
+      "remarks": "物流发货"
+    },
+    {
+      "order_id": "SO20250913004",
+      "customer_name": "孙先生",
+      "order_date": "2025-09-13",
+      "part_id": "P005",
+      "part_name": "机油滤清器",
+      "quantity": 8,
+      "total_price": 160,
+      "order_status": "已出库",
+      "remarks": ""
+    },
+    {
+      "order_id": "SO20250912005",
+      "customer_name": "张小姐",
+      "order_date": "2025-09-12",
+      "part_id": "P008",
+      "part_name": "轮胎",
+      "quantity": 4,
+      "total_price": 1200,
+      "order_status": "已出库",
+      "remarks": "正常出库"
+    },
+    {
+      "order_id": "SO20250911006",
+      "customer_name": "李先生",
+      "order_date": "2025-09-11",
+      "part_id": "P006",
+      "part_name": "电池",
+      "quantity": 1,
+      "total_price": 500,
+      "order_status": "待付款",
+      "remarks": "急件出库，尚未付款"
+    },
+    {
+      "order_id": "SO20250910007",
+      "customer_name": "周先生",
+      "order_date": "2025-09-10",
+      "part_id": "P003",
+      "part_name": "火花塞",
+      "quantity": 15,
+      "total_price": 300,
+      "order_status": "待出库",
+      "remarks": ""
+    },
+    {
+      "order_id": "SO20250909008",
+      "customer_name": "吴先生",
+      "order_date": "2025-09-09",
+      "part_id": "P009",
+      "part_name": "空调滤芯",
+      "quantity": 20,
+      "total_price": 240,
+      "order_status": "已取消",
+      "remarks": "客户取消"
+    },
+    {
+      "order_id": "SO20250908009",
+      "customer_name": "郑先生",
+      "order_date": "2025-09-08",
+      "part_id": "P007",
+      "part_name": "减震器",
+      "quantity": 3,
+      "total_price": 450,
+      "order_status": "已完成",
+      "remarks": ""
+    },
+    {
+      "order_id": "SO20250907010",
+      "customer_name": "冯先生",
+      "order_date": "2025-09-07",
+      "part_id": "P010",
+      "part_name": "水箱",
+      "quantity": 2,
+      "total_price": 200,
+      "order_status": "已完成",
+      "remarks": "客户急需"
+    }
+  ]
+}
