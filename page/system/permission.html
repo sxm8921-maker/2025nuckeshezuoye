@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>权限分配</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../lib/layui-v2.6.3/css/layui.css" media="all">
+    <link rel="stylesheet" href="../../css/public.css" media="all">
+    <style>
+        .permission-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+        .permission-panel {
+            flex: 1;
+            padding: 15px;
+            border: 1px solid #e6e6e6;
+            border-radius: 2px;
+            box-shadow: 0 1px 2px 0 rgba(0,0,0,.05);
+        }
+        .permission-panel-title {
+            text-align: center;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #e6e6e6;
+            font-size: 16px;
+        }
+        .permission-panel-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .permission-actions {
+            flex-basis: 150px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 0 10px;
+        }
+        .layui-card {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="layuimini-container">
+    <div class="layuimini-main">
+
+        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+            <legend>用户与角色权限分配</legend>
+        </fieldset>
+        
+        <div class="permission-container">
+            <div class="permission-panel">
+                <div class="permission-panel-title">用户列表</div>
+                <div class="permission-panel-list">
+                     <table class="layui-hide" id="userTable" lay-filter="userTableFilter"></table>
+                </div>
+            </div>
+            
+            <div class="permission-actions">
+                 <button class="layui-btn layui-btn-sm" id="assignRoleBtn">分配角色</button>
+                 <div style="margin-top: 20px;"></div>
+                 <button class="layui-btn layui-btn-sm layui-btn-normal" id="viewPermissionsBtn">查看权限</button>
+            </div>
+
+            <div class="permission-panel" style="margin-left: 20px;">
+                <div class="permission-panel-title">角色列表</div>
+                <div class="layui-form permission-panel-list" id="roleList">
+                    </div>
+            </div>
+        </div>
+        
+    </div>
+</div>
+<script src="../../lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
+<script>
+    layui.use(['form', 'table', 'layer'], function () {
+        var $ = layui.jquery,
+            form = layui.form,
+            table = layui.table,
+            layer = layui.layer;
+
+        // 模拟数据
+        var allUsers = [
+            { id: 1, username: "四姐", department: "系统部", roles: [1]},
+            { id: 2, username: "张三", department: "采购部", roles: [2, 4]},
+            { id: 3, username: "李四", department: "销售部", roles: [3]},
+            { id: 4, username: "王五", department: "财务部", roles: []},
+            { id: 5, username: "赵六", department: "仓储部", roles: [4]}
+        ];
+
+        var allRoles = [
+            { role_id: 1, role_name: "超级管理员", permissions: ["所有权限"]},
+            { role_id: 2, role_name: "采购管理员", permissions: ["查看采购订单", "创建采购订单", "修改采购订单"]},
+            { role_id: 3, role_name: "销售管理员", permissions: ["查看销售订单", "创建销售订单", "修改销售订单", "进行收款操作"]},
+            { role_id: 4, role_name: "仓库管理员", permissions: ["查看库存", "入库操作", "出库操作", "盘点操作"]}
+        ];
+
+        // 渲染用户列表
+        var userTableInstance = table.render({
+            elem: '#userTable',
+            data: allUsers,
+            cols: [[
+                {type: 'checkbox', fixed: 'left'},
+                {field: 'id', width: 80, title: 'ID', sort: true},
+                {field: 'username', width: 120, title: '用户名'},
+                {field: 'department', width: 120, title: '部门'}
+            ]],
+            page: true,
+            skin: 'line',
+            limit: 10,
+            done: function(res){
+                // 默认选中第一个用户并渲染其角色
+                if(res.data && res.data.length > 0){
+                    var firstUserId = res.data[0].id;
+                    renderRoleList(firstUserId);
+                    // 模拟选中第一个用户的复选框
+                    var firstRow = $('.layui-table-body tr[data-index="0"]');
+                    firstRow.find('input[type="checkbox"]').prop('checked', true);
+                    firstRow.find('.layui-form-checkbox').addClass('layui-form-checked');
+                }
+            }
+        });
+
+        // 渲染角色列表
+        function renderRoleList(userId) {
+            var selectedUser = allUsers.find(u => u.id === userId);
+            var selectedRoles = selectedUser ? selectedUser.roles : [];
+            var roleHtml = '';
+
+            allRoles.forEach(function(role){
+                var checked = selectedRoles.includes(role.role_id) ? 'checked' : '';
+                roleHtml += '<div class="layui-card">' +
+                    '<div class="layui-card-body">' +
+                        '<input type="checkbox" lay-skin="primary" name="role" title="' + role.role_name + '" value="' + role.role_id + '" ' + checked + '>' +
+                    '</div>' +
+                '</div>';
+            });
+            $('#roleList').html(roleHtml);
+            form.render('checkbox');
+        }
+
+        // 监听用户选择
+        table.on('checkbox(userTableFilter)', function(obj){
+            var checkedData = table.checkStatus('userTable').data;
+            if(checkedData.length > 1){
+                 layer.msg('请一次只选择一个用户进行权限分配', {icon: 5});
+                 // 自动取消多余的选择
+                 table.reload('userTable', {
+                    done: function() {
+                        var targetId = obj.data.id;
+                        $('.layui-table-body tr').each(function(){
+                            var itemData = table.data.userTable[$(this).data('index')];
+                            if(itemData.id === targetId) {
+                                $(this).find('input[type="checkbox"]').prop('checked', true);
+                                $(this).find('.layui-form-checkbox').addClass('layui-form-checked');
+                            } else {
+                                $(this).find('input[type="checkbox"]').prop('checked', false);
+                                $(this).find('.layui-form-checkbox').removeClass('layui-form-checked');
+                            }
+                        });
+                        renderRoleList(obj.data.id);
+                    }
+                 });
+                 return;
+            }
+            
+            if(checkedData.length === 1){
+                 renderRoleList(checkedData[0].id);
+            } else {
+                 $('#roleList').empty();
+                 form.render('checkbox');
+            }
+        });
+
+        // 监听分配角色按钮
+        $('#assignRoleBtn').on('click', function(){
+            var checkedData = table.checkStatus('userTable').data;
+            if(checkedData.length === 0){
+                layer.msg('请先选择一个用户！', {icon: 5});
+                return;
+            }
+            var selectedUserId = checkedData[0].id;
+            var newRoles = [];
+            $('input[name="role"]:checked').each(function(){
+                newRoles.push(parseInt($(this).val()));
+            });
+
+            var userIndex = allUsers.findIndex(u => u.id === selectedUserId);
+            if(userIndex !== -1){
+                allUsers[userIndex].roles = newRoles;
+            }
+            layer.msg('角色分配成功！', {icon: 1});
+        });
+
+        // 监听查看权限按钮
+        $('#viewPermissionsBtn').on('click', function(){
+            var checkedData = table.checkStatus('userTable').data;
+            if(checkedData.length === 0){
+                layer.msg('请先选择一个用户！', {icon: 5});
+                return;
+            }
+            var selectedUser = checkedData[0];
+            var userRoles = selectedUser.roles;
+
+            var permissionsList = [];
+            userRoles.forEach(function(roleId){
+                var role = allRoles.find(r => r.role_id === roleId);
+                if(role){
+                    permissionsList = permissionsList.concat(role.permissions);
+                }
+            });
+
+            var uniquePermissions = Array.from(new Set(permissionsList));
+
+            var html = '<div style="padding: 20px;">' +
+                       '<h4>' + selectedUser.username + ' 的权限：</h4>' +
+                       '<ul>';
+            uniquePermissions.forEach(function(perm){
+                html += '<li>' + perm + '</li>';
+            });
+            html += '</ul></div>';
+
+            layer.open({
+                type: 1,
+                title: selectedUser.username + ' 的权限',
+                area: ['400px', '400px'],
+                content: html
+            });
+        });
+    });
+</script>
+</body>
+</html>

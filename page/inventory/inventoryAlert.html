@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>库存预警</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../lib/layui-v2.6.3/css/layui.css" media="all">
+    <link rel="stylesheet" href="../../css/public.css" media="all">
+    <style>
+        .layui-table-tips-c:hover {
+            color: #FF5722;
+        }
+    </style>
+</head>
+<body>
+<div class="layuimini-container">
+    <div class="layuimini-main">
+
+        <fieldset class="table-search-fieldset">
+            <legend>库存预警列表</legend>
+            <div style="margin: 10px 10px 10px 10px">
+                <form class="layui-form layui-form-pane" action="">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">零件名称/编号</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="keyword" placeholder="请输入零件名称或编号" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <button type="submit" class="layui-btn layui-btn-primary" lay-submit lay-filter="data-search-btn"><i class="layui-icon"></i> 搜 索</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </fieldset>
+
+        <table class="layui-hide" id="currentTableId" lay-filter="currentTableFilter"></table>
+
+    </div>
+</div>
+<script src="../../lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
+<script>
+    layui.use(['form', 'table', 'layer'], function () {
+        var $ = layui.jquery,
+            form = layui.form,
+            table = layui.table,
+            layer = layui.layer;
+
+        // 渲染表格
+        table.render({
+            elem: '#currentTableId',
+            url: '../../api/inventoryAlert.json',
+            defaultToolbar: ['filter', 'exports', 'print', {
+                title: '提示',
+                layEvent: 'LAYTABLE_TIPS',
+                icon: 'layui-icon-tips'
+            }],
+            cols: [[
+                {field: 'part_id', width: 100, title: '零件编号', sort: true},
+                {field: 'part_name', width: 120, title: '零件名称'},
+                {field: 'current_quantity', width: 120, title: '当前库存', sort: true},
+                {field: 'safe_stock_level', width: 120, title: '安全库存量'},
+                {field: 'alert_level', width: 120, title: '预警等级', templet: function(d){
+                    if(d.alert_level === '紧急'){
+                        return '<span style="color:#FF5722;">' + d.alert_level + '</span>';
+                    } else if(d.alert_level === '警告'){
+                        return '<span style="color:#FFB800;">' + d.alert_level + '</span>';
+                    }
+                    return '<span>' + d.alert_level + '</span>';
+                }},
+                {field: 'remarks', title: '备注', templet: function(d){
+                    return '<span class="layui-table-tips-c" lay-tips="'+d.remarks+'">' + d.remarks + '</span>';
+                }}
+            ]],
+            limits: [10, 15, 20, 25, 50, 100],
+            limit: 15,
+            page: true,
+            skin: 'line',
+            rowspan: function(row){
+                if(row.alert_level === '紧急'){
+                    return 'layui-bg-red';
+                }
+            }
+        });
+
+        // 监听搜索操作
+        form.on('submit(data-search-btn)', function (data) {
+            var keyword = data.field.keyword;
+            table.reload('currentTableId', {
+                page: {
+                    curr: 1
+                },
+                where: {
+                    keyword: keyword
+                }
+            }, 'data');
+            
+            // 模拟前端筛选
+            $.getJSON('../../api/inventoryAlert.json', function(res){
+                var filteredData = res.data.filter(function(item){
+                    return item.part_name.includes(keyword) || item.part_id.includes(keyword);
+                });
+                table.render({
+                    elem: '#currentTableId',
+                    data: filteredData,
+                    page: true,
+                    cols: [[
+                        {field: 'part_id', width: 100, title: '零件编号', sort: true},
+                        {field: 'part_name', width: 120, title: '零件名称'},
+                        {field: 'current_quantity', width: 120, title: '当前库存', sort: true},
+                        {field: 'safe_stock_level', width: 120, title: '安全库存量'},
+                        {field: 'alert_level', width: 120, title: '预警等级', templet: function(d){
+                            if(d.alert_level === '紧急'){
+                                return '<span style="color:#FF5722;">' + d.alert_level + '</span>';
+                            } else if(d.alert_level === '警告'){
+                                return '<span style="color:#FFB800;">' + d.alert_level + '</span>';
+                            }
+                            return '<span>' + d.alert_level + '</span>';
+                        }},
+                        {field: 'remarks', title: '备注', templet: function(d){
+                            return '<span class="layui-table-tips-c" lay-tips="'+d.remarks+'">' + d.remarks + '</span>';
+                        }}
+                    ]]
+                });
+            });
+
+            return false;
+        });
+    });
+</script>
+</body>
+</html>

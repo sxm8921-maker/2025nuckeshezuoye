@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>应收账款管理</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../lib/layui-v2.6.3/css/layui.css" media="all">
+    <link rel="stylesheet" href="../../css/public.css" media="all">
+</head>
+<body>
+<div class="layuimini-container">
+    <div class="layuimini-main">
+
+        <fieldset class="table-search-fieldset">
+            <legend>应收账款列表</legend>
+            <div style="margin: 10px 10px 10px 10px">
+                <form class="layui-form layui-form-pane" action="">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">客户名称</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="customer_name" placeholder="请输入客户名称" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">订单号</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="order_id" placeholder="请输入订单号" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <button type="submit" class="layui-btn layui-btn-primary" lay-submit lay-filter="data-search-btn"><i class="layui-icon"></i> 搜 索</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </fieldset>
+
+        <table class="layui-hide" id="arTable" lay-filter="arTableFilter"></table>
+
+        <script type="text/html" id="arTableBar">
+            {{#  if(d.remaining_amount > 0){ }}
+            <a class="layui-btn layui-btn-xs" lay-event="receive">收款</a>
+            {{#  } else { }}
+            <span style="color:#666;">已结清</span>
+            {{#  } }}
+        </script>
+
+        <hr/>
+        
+        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+            <legend>应收账款月度统计</legend>
+        </fieldset>
+        <table class="layui-hide" id="arSummaryTable" lay-filter="arSummaryTableFilter"></table>
+
+    </div>
+</div>
+<script src="../../lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
+<script>
+    layui.use(['form', 'table', 'layer'], function () {
+        var $ = layui.jquery,
+            form = layui.form,
+            table = layui.table,
+            layer = layui.layer;
+
+        // 模拟逾期提醒
+        function checkOverdueReminder() {
+            var today = new Date();
+            var overdueOrders = [];
+
+            $.getJSON('../../api/accountsReceivable.json', function(res){
+                res.data.forEach(function(item){
+                    var dueDate = new Date(item.due_date);
+                    if(item.remaining_amount > 0 && dueDate.getTime() < today.getTime()){
+                        overdueOrders.push(item);
+                    }
+                });
+
+                if(overdueOrders.length > 0){
+                    var reminderMsg = '以下应收款已逾期，请及时处理：<br>';
+                    overdueOrders.forEach(function(item){
+                        reminderMsg += item.customer_name + ' - ' + item.order_id + ' (￥' + item.remaining_amount.toFixed(2) + ')<br>';
+                    });
+                    layer.alert(reminderMsg, {title: '逾期提醒', icon: 5});
+                }
+            });
+        }
+        
+        // 页面加载后立即执行提醒检查
+        checkOverdueReminder();
+
+        // 渲染应收账款表格
+        var arTableInstance = table.render({
+            elem: '#arTable',
+            url: '../../api/accountsReceivable.json',
+            defaultToolbar: ['filter', 'exports', 'print'],
+            cols: [[
+                {field: 'order_id', width: 150, title: '订单号'},
+                {field: 'customer_name', width: 120, title: '客户名称'},
+                {field: 'total_amount', width: 120, title: '应收金额', sort: true},
+                {field: 'received_amount', width: 120, title: '已收金额', sort: true},
+                {field: 'remaining_amount', width: 120, title: '剩余金额', sort: true, templet: function(d){
+                    var color = d.remaining_amount > 0 && new Date(d.due_date) < new Date() ? 'red' : '';
+                    return '<span style="color:' + color + ';">￥' + d.remaining_amount.toFixed(2) + '</span>';
+                }},
+                {field: 'due_date', width: 120, title: '应付款日期', sort: true},
+                {title: '操作', minWidth: 100, templet: '#arTableBar', fixed: 'right', align: 'center'}
+            ]],
+            limits: [10, 15, 20, 25, 50, 100],
+            limit: 15,
+            page: true,
+            skin: 'line',
+            done: function(res, curr, count){
+                // 模拟统计数据
+                var totalAR = 0;
+                var totalReceived = 0;
+                var totalRemaining = 0;
+
+                res.data.forEach(function(item){
+                    totalAR += item.total_amount;
+                    totalReceived += item.received_amount;
+                    totalRemaining += item.remaining_amount;
+                });
+
+                // 渲染统计表格
+                table.render({
+                    elem: '#arSummaryTable',
+                    data: [
+                        { 'item': '总计', 'total_ar': totalAR.toFixed(2), 'total_received': totalReceived.toFixed(2), 'total_remaining': totalRemaining.toFixed(2) }
+                    ],
+                    cols: [[
+                        {field: 'item', title: '统计项'},
+                        {field: 'total_ar', title: '应收总额'},
+                        {field: 'total_received', title: '已收总额'},
+                        {field: 'total_remaining', title: '未收总额'}
+                    ]],
+                    skin: 'line',
+                    size: 'sm'
+                });
+            }
+        });
+
+        // 监听搜索操作
+        form.on('submit(data-search-btn)', function (data) {
+            var keyword_customer = data.field.customer_name;
+            var keyword_order = data.field.order_id;
+            
+            // 模拟前端筛选
+            $.getJSON('../../api/accountsReceivable.json', function(res){
+                var filteredData = res.data.filter(function(item){
+                    return item.customer_name.includes(keyword_customer) && item.order_id.includes(keyword_order);
+                });
+                arTableInstance.reload({ data: filteredData });
+            });
+            return false;
+        });
+
+        // 监听表格操作栏
+        table.on('tool(arTableFilter)', function (obj) {
+            var data = obj.data;
+            if (obj.event === 'receive') {
+                layer.prompt({
+                    formType: 0,
+                    value: data.remaining_amount,
+                    title: '收款金额 (' + data.customer_name + ')'
+                }, function(value, index, elem){
+                    var receivedAmount = parseFloat(value);
+                    if (isNaN(receivedAmount) || receivedAmount <= 0) {
+                        layer.msg('请输入有效的收款金额！', {icon: 5});
+                        return false;
+                    }
+                    if (receivedAmount > data.remaining_amount) {
+                         layer.msg('收款金额不能大于剩余金额！', {icon: 5});
+                         return false;
+                    }
+                    
+                    // 模拟更新数据
+                    obj.update({
+                        received_amount: data.received_amount + receivedAmount,
+                        remaining_amount: data.remaining_amount - receivedAmount
+                    });
+
+                    // 重新加载统计表格
+                    arTableInstance.reload();
+                    
+                    layer.msg('收款成功！', {icon: 1});
+                    layer.close(index);
+                });
+            }
+        });
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>供应商信息管理</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../lib/layui-v2.6.3/css/layui.css" media="all">
+    <link rel="stylesheet" href="../../css/public.css" media="all">
+    <style>
+        .star-filled {
+            color: #FFB800; /* 金黄色 */
+        }
+        .star-empty {
+            color: #ccc; /* 灰色 */
+        }
+        /* 鼠标悬停在星星上显示为手型，表示可点击 */
+        .layui-table-cell .layui-icon-rate, .layui-table-cell .layui-icon-rate-solid {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div class="layuimini-container">
+    <div class="layuimini-main">
+
+        <div class="layui-form-item layui-form-pane">
+            <div class="layui-inline">
+                <div class="layui-input-inline">
+                    <input type="text" name="supplierName" lay-verify="required" placeholder="请输入供应商名称" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <button class="layui-btn layui-btn-primary" lay-filter="searchBtn">
+                    <i class="layui-icon layui-icon-search"></i> 搜索
+                </button>
+            </div>
+            <div class="layui-inline">
+                <button class="layui-btn layui-btn-primary" id="addBtn">
+                    <i class="layui-icon layui-icon-add-1"></i> 新增
+                </button>
+            </div>
+        </div>
+
+        <table class="layui-hide" id="supplierTable" lay-filter="supplierTableFilter"></table>
+
+        <script type="text/html" id="supplier-rating-tpl">
+            {{# for(var i=1; i<=5; i++){ }}
+                {{# if(i <= d.rating){ }}
+                    <i class="layui-icon layui-icon-rate star-filled" data-rating="{{i}}" data-id="{{d.id}}"></i>
+                {{# } else { }}
+                    <i class="layui-icon layui-icon-rate-solid star-empty" data-rating="{{i}}" data-id="{{d.id}}"></i>
+                {{# } }}
+            {{# } }}
+        </script>
+        
+        <script type="text/html" id="supplier-tool">
+            <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+            <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del">删除</a>
+        </script>
+
+    </div>
+</div>
+<script src="../../lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
+<script>
+    layui.use(['form', 'table', 'jquery', 'layer'], function () {
+        var $ = layui.jquery,
+            form = layui.form,
+            table = layui.table,
+            layer = layui.layer;
+
+        // 模拟数据
+        var supplierData = [
+            {id: 1, supplier_name: "A公司", contact_person: "张三", phone: "13800000001", email: "a@company.com", address: "上海市", rating: 5},
+            {id: 2, supplier_name: "B公司", contact_person: "李四", phone: "13911111111", email: "b@company.com", address: "北京市", rating: 4},
+            {id: 3, supplier_name: "C公司", contact_person: "王五", phone: "18622222222", email: "c@company.com", address: "广州市", rating: 3},
+            {id: 4, supplier_name: "D公司", contact_person: "赵六", phone: "13333333333", email: "d@company.com", address: "深圳市", rating: 5},
+            {id: 5, supplier_name: "E公司", contact_person: "钱七", phone: "15944444444", email: "e@company.com", address: "杭州市", rating: 2}
+        ];
+
+        // 渲染表格
+        var supplierTableInstance = table.render({
+            elem: '#supplierTable',
+            data: supplierData,
+            cols: [[
+                {type: 'checkbox', fixed: 'left'},
+                {field: 'id', width: 80, title: 'ID', sort: true},
+                {field: 'supplier_name', title: '供应商名称'},
+                {field: 'contact_person', title: '联系人', width: 100},
+                {field: 'phone', title: '电话', width: 120},
+                {field: 'email', title: '邮箱', width: 150},
+                {field: 'address', title: '地址'},
+                {field: 'rating', title: '评级', width: 120, templet: '#supplier-rating-tpl'},
+                {title: '操作', minWidth: 150, templet: '#supplier-tool', fixed: "right", align: "center"}
+            ]],
+            page: true,
+            skin: 'line',
+            // 表格渲染完成后，为星星添加点击事件
+            done: function(res, curr, count){
+                $('.layui-table-body .layui-icon').on('click', function(){
+                    var newRating = $(this).data('rating');
+                    var supplierId = $(this).data('id');
+                    
+                    for(var i = 0; i < supplierData.length; i++){
+                        if(supplierData[i].id === supplierId){
+                            supplierData[i].rating = newRating;
+                            break;
+                        }
+                    }
+                    
+                    // 重新渲染表格以更新评级显示
+                    supplierTableInstance.reload({
+                        data: supplierData,
+                        page: {
+                            curr: curr
+                        }
+                    });
+                    layer.msg('评级已更新为 ' + newRating + ' 星', {icon: 1});
+                });
+            }
+        });
+
+        // 监听搜索按钮
+        $('#searchBtn').on('click', function(){
+            var supplierName = $('input[name="supplierName"]').val();
+            var filteredData = supplierData.filter(function(item){
+                return item.supplier_name.includes(supplierName);
+            });
+            table.reload('supplierTable', { data: filteredData });
+        });
+        
+        // 监听新增按钮
+        $('#addBtn').on('click', function(){
+            layer.msg('新增功能待实现');
+        });
+        
+        // 监听表格操作列
+        table.on('tool(supplierTableFilter)', function(obj){
+            var data = obj.data;
+            if(obj.event === 'edit'){
+                layer.msg('编辑 ' + data.supplier_name);
+            } else if(obj.event === 'del'){
+                layer.confirm('确定删除该供应商吗？', function(index){
+                    layer.close(index);
+                    layer.msg('已删除 ' + data.supplier_name);
+                    obj.del();
+                });
+            }
+        });
+    });
+</script>
+</body>
+</html>

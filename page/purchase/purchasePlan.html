@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>采购计划管理</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../lib/layui-v2.6.3/css/layui.css" media="all">
+    <link rel="stylesheet" href="../../css/public.css" media="all">
+</head>
+<body>
+<div class="layuimini-container">
+    <div class="layuimini-main">
+
+        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+            <legend>采购计划生成与调整</legend>
+        </fieldset>
+        <div class="layui-btn-container">
+            <button class="layui-btn layui-btn-primary" id="addPartBtn"><i class="layui-icon"></i> 添加零件</button>
+            <button class="layui-btn layui-btn-warm" id="autoGenerateBtn"><i class="layui-icon"></i> 自动生成采购建议</button>
+            <button class="layui-btn layui-btn-normal" id="submitPlanBtn"><i class="layui-icon"></i> 提交审核</button>
+        </div>
+        
+        <table class="layui-hide" id="planTable" lay-filter="planTableFilter"></table>
+
+        <script type="text/html" id="planTableBar">
+            <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+        </script>
+        
+        <hr/>
+        
+        <fieldset class="table-search-fieldset">
+            <legend>采购计划列表</legend>
+            <div style="margin: 10px 10px 10px 10px">
+                <form class="layui-form layui-form-pane" action="">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">计划状态</label>
+                            <div class="layui-input-inline">
+                                <select name="plan_status_filter">
+                                    <option value="">所有状态</option>
+                                    <option value="待审核">待审核</option>
+                                    <option value="已审核">已审核</option>
+                                    <option value="已完成">已完成</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <button type="submit" class="layui-btn layui-btn-primary" lay-submit lay-filter="data-search-btn"><i class="layui-icon"></i> 搜索</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </fieldset>
+
+        <table class="layui-hide" id="listTable" lay-filter="listTableFilter"></table>
+
+    </div>
+</div>
+<script src="../../lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
+<script>
+    layui.use(['form', 'table', 'layer', 'element'], function () {
+        var $ = layui.jquery,
+            form = layui.form,
+            table = layui.table,
+            layer = layui.layer,
+            element = layui.element;
+
+        // 渲染采购计划表格（用于创建和调整）
+        var planTableInstance = table.render({
+            elem: '#planTable',
+            height: 'full-200',
+            cellMinWidth: 80,
+            cols: [[
+                {type: 'checkbox', fixed: 'left'},
+                {field: 'part_id', title: '零件编号', edit: 'text'},
+                {field: 'part_name', title: '零件名称', edit: 'text'},
+                {field: 'quantity', title: '采购数量', edit: 'text', sort: true},
+                {field: 'expected_date', title: '期望到货日期', edit: 'text'},
+                {title: '操作', width: 80, templet: '#planTableBar', fixed: 'right', align: 'center'}
+            ]],
+            data: [], // 初始为空
+            limit: 100,
+            skin: 'row'
+        });
+        
+        // 监听“添加零件”按钮
+        $('#addPartBtn').on('click', function(){
+            var oldData = table.cache.planTable;
+            oldData.push({}); // 添加一个空对象作为新行
+            planTableInstance.reload({
+                data: oldData
+            });
+        });
+
+        // 监听“删除零件”按钮
+        table.on('tool(planTableFilter)', function(obj){
+            if(obj.event === 'del'){
+                layer.confirm('确定删除该行数据吗？', function(index){
+                    obj.del();
+                    layer.close(index);
+                });
+            }
+        });
+        
+        // 监听“自动生成采购建议”按钮
+        $('#autoGenerateBtn').on('click', function(){
+            layer.msg('正在根据库存和销售数据计算...', {icon: 16, time: 1000});
+            setTimeout(function(){
+                var suggestedData = [
+                    {"part_id": "P011", "part_name": "刹车盘", "quantity": 50, "expected_date": "2025-10-01"},
+                    {"part_id": "P012", "part_name": "传动轴", "quantity": 10, "expected_date": "2025-10-05"}
+                ];
+                planTableInstance.reload({
+                    data: suggestedData
+                });
+                layer.msg('已生成采购建议', {icon: 1});
+            }, 1500);
+        });
+
+        // 监听“提交审核”按钮
+        $('#submitPlanBtn').on('click', function(){
+             var checkStatus = table.checkStatus('planTable');
+             var data = checkStatus.data;
+             if(data.length === 0){
+                 layer.msg('请先选择要提交的零件！', {icon: 5});
+                 return;
+             }
+             layer.confirm('确定提交选中的 ' + data.length + ' 条采购计划吗？', function(index){
+                 // 模拟提交成功，更新列表
+                 data.forEach(function(item){
+                     item.plan_id = 'PL' + new Date().getTime(); // 模拟生成计划ID
+                     item.status = '待审核';
+                     item.progress = 0;
+                 });
+                 // 将新数据添加到列表表格中
+                 table.reload('listTable', {
+                     data: table.cache.listTable.concat(data)
+                 });
+                 // 清空计划表格
+                 planTableInstance.reload({ data: [] });
+                 layer.msg('提交成功，等待审核', {icon: 1});
+                 layer.close(index);
+             });
+        });
+
+        // 渲染采购计划列表表格
+        var listTableInstance = table.render({
+            elem: '#listTable',
+            url: '../../api/purchasePlan.json',
+            defaultToolbar: ['filter', 'exports', 'print'],
+            cols: [[
+                {field: 'plan_id', width: 150, title: '计划单号', sort: true},
+                {field: 'part_name', width: 120, title: '零件名称'},
+                {field: 'quantity', width: 100, title: '采购数量'},
+                {field: 'expected_date', width: 120, title: '期望到货日期'},
+                {field: 'status', width: 100, title: '执行状态', templet: function(d){
+                    var progress = '';
+                    if(d.status === '已审核'){
+                        progress = '<div class="layui-progress layui-progress-sm" lay-showpercent="true"><div class="layui-progress-bar" lay-percent="50%"></div></div>';
+                    } else if(d.status === '已完成'){
+                        progress = '<div class="layui-progress layui-progress-sm" lay-showpercent="true"><div class="layui-progress-bar layui-bg-green" lay-percent="100%"></div></div>';
+                    }
+                    return d.status + progress;
+                }},
+                {title: '操作', width: 100, templet: function(d){
+                     if(d.status === '待审核'){
+                         return '<a class="layui-btn layui-btn-xs" lay-event="approve">审核通过</a>';
+                     }
+                     return '';
+                }, fixed: 'right', align: 'center'}
+            ]],
+            limits: [10, 15, 20, 25, 50, 100],
+            limit: 15,
+            page: true,
+            skin: 'line',
+            done: function(){
+                // 重新渲染进度条
+                element.render('progress');
+            }
+        });
+
+        // 监听列表表格操作
+        table.on('tool(listTableFilter)', function(obj){
+            var data = obj.data;
+            if(obj.event === 'approve'){
+                layer.confirm('确定要批准该采购计划吗？', function(index){
+                    // 模拟审核通过，更新状态
+                    obj.update({
+                        status: '已审核',
+                        progress: 50 // 更新进度条数据
+                    });
+                    layer.msg('审核已通过', {icon: 1});
+                    layer.close(index);
+                });
+            }
+        });
+
+        // 监听搜索操作
+        form.on('submit(data-search-btn)', function (data) {
+            var status = data.field.plan_status_filter;
+            listTableInstance.reload({
+                page: { curr: 1 },
+                where: { status: status }
+            }, 'data');
+            // 模拟前端筛选
+            $.getJSON('../../api/purchasePlan.json', function(res){
+                var filteredData = res.data.filter(function(item){
+                    return status === "" || item.status === status;
+                });
+                listTableInstance.reload({ data: filteredData });
+            });
+            return false;
+        });
+    });
+</script>
+</body>
+</html>

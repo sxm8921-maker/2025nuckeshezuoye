@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>收支明细管理</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../lib/layui-v2.6.3/css/layui.css" media="all">
+    <link rel="stylesheet" href="../../css/public.css" media="all">
+</head>
+<body>
+<div class="layuimini-container">
+    <div class="layuimini-main">
+
+        <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+            <ul class="layui-tab-title">
+                <li class="layui-this">收入录入</li>
+                <li>支出录入</li>
+            </ul>
+            <div class="layui-tab-content">
+                <div class="layui-tab-item layui-show">
+                    <form class="layui-form" lay-filter="incomeForm" style="width: 90%;padding-left: 20px;">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label required">收入金额</label>
+                            <div class="layui-input-block">
+                                <input type="number" name="amount" lay-verify="required|number" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-form-item layui-form-text">
+                            <label class="layui-form-label">备注</label>
+                            <div class="layui-input-block">
+                                <textarea name="remark" placeholder="请输入备注" class="layui-textarea"></textarea>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                             <label class="layui-form-label">凭证上传</label>
+                            <div class="layui-input-block">
+                                <button type="button" class="layui-btn" id="uploadIncomeBtn">上传凭证</button>
+                                <div id="incomePreview" style="margin-top: 10px;"></div>
+                                <input type="hidden" name="voucher" id="incomeVoucher">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-input-block">
+                                <button class="layui-btn" lay-submit lay-filter="incomeSubmit">保存收入</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="layui-tab-item">
+                    <form class="layui-form" lay-filter="expenseForm" style="width: 90%;padding-left: 20px;">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label required">支出金额</label>
+                            <div class="layui-input-block">
+                                <input type="number" name="amount" lay-verify="required|number" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-form-item layui-form-text">
+                            <label class="layui-form-label">备注</label>
+                            <div class="layui-input-block">
+                                <textarea name="remark" placeholder="请输入备注" class="layui-textarea"></textarea>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                             <label class="layui-form-label">凭证上传</label>
+                            <div class="layui-input-block">
+                                <button type="button" class="layui-btn" id="uploadExpenseBtn">上传凭证</button>
+                                <div id="expensePreview" style="margin-top: 10px;"></div>
+                                <input type="hidden" name="voucher" id="expenseVoucher">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-input-block">
+                                <button class="layui-btn" lay-submit lay-filter="expenseSubmit">保存支出</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <hr/>
+        
+        <fieldset class="table-search-fieldset">
+            <legend>收支明细</legend>
+            <div style="margin: 10px 10px 10px 10px">
+                <form class="layui-form layui-form-pane" action="">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">日期范围</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="date_range" autocomplete="off" class="layui-input" id="dateRange">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">收支类型</label>
+                            <div class="layui-input-inline">
+                                <select name="transaction_type_filter">
+                                    <option value="">全部</option>
+                                    <option value="收入">收入</option>
+                                    <option value="支出">支出</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <button type="submit" class="layui-btn layui-btn-primary" lay-submit lay-filter="data-search-btn"><i class="layui-icon"></i> 搜 索</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </fieldset>
+        
+        <table class="layui-hide" id="transactionTable" lay-filter="transactionTableFilter"></table>
+
+        <script type="text/html" id="transactionTableBar">
+            {{#  if(d.voucher){ }}
+            <a class="layui-btn layui-btn-xs" lay-event="preview">预览凭证</a>
+            {{#  } }}
+        </script>
+
+    </div>
+</div>
+<script src="../../lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
+<script>
+    layui.use(['form', 'table', 'layer', 'upload', 'laydate'], function () {
+        var $ = layui.jquery,
+            form = layui.form,
+            table = layui.table,
+            layer = layui.layer,
+            upload = layui.upload,
+            laydate = layui.laydate;
+
+        // 初始化日期范围选择器
+        laydate.render({
+            elem: '#dateRange',
+            range: true
+        });
+
+        // 渲染收入凭证上传
+        upload.render({
+            elem: '#uploadIncomeBtn',
+            url: '/api/upload/', // 模拟上传接口
+            done: function(res){
+                layer.msg('凭证上传成功', {icon: 1});
+                $('#incomeVoucher').val(res.data.src);
+                $('#incomePreview').html('<img src="' + res.data.src + '" style="max-width:100px; max-height:100px;">');
+            }
+        });
+        
+        // 渲染支出凭证上传
+        upload.render({
+            elem: '#uploadExpenseBtn',
+            url: '/api/upload/', // 模拟上传接口
+            done: function(res){
+                layer.msg('凭证上传成功', {icon: 1});
+                $('#expenseVoucher').val(res.data.src);
+                $('#expensePreview').html('<img src="' + res.data.src + '" style="max-width:100px; max-height:100px;">');
+            }
+        });
+
+        // 渲染明细表格
+        var transactionTableInstance = table.render({
+            elem: '#transactionTable',
+            url: '../../api/transactionDetails.json',
+            defaultToolbar: ['filter', 'exports', 'print'],
+            cols: [[
+                {field: 'date', width: 150, title: '日期', sort: true},
+                {field: 'transaction_id', width: 150, title: '单号'},
+                {field: 'type', width: 80, title: '类型'},
+                {field: 'amount', width: 120, title: '金额(元)', sort: true},
+                {field: 'remark', title: '备注'},
+                {field: 'voucher', width: 100, title: '凭证', templet: function(d){
+                     if(d.voucher){
+                         return '有';
+                     }
+                     return '无';
+                }},
+                {title: '操作', minWidth: 100, templet: '#transactionTableBar', fixed: 'right', align: 'center'}
+            ]],
+            limits: [10, 15, 20, 25, 50, 100],
+            limit: 15,
+            page: true,
+            skin: 'line',
+            done: function(res){
+                 // 模拟月度统计
+                var totalIncome = 0;
+                var totalExpense = 0;
+                res.data.forEach(function(item){
+                    if(item.type === '收入'){
+                        totalIncome += item.amount;
+                    } else if(item.type === '支出'){
+                        totalExpense += item.amount;
+                    }
+                });
+                var footer = '<tr><td>月度总计</td><td></td><td></td><td></td><td>收入：<span style="color:green;">￥' + totalIncome.toFixed(2) + '</span></td><td></td><td>支出：<span style="color:red;">￥' + totalExpense.toFixed(2) + '</span></td></tr>';
+                $('.layui-table-body table').append(footer);
+                $('.layui-table-fixed-r table').append(footer);
+            }
+        });
+
+        // 监听搜索操作
+        form.on('submit(data-search-btn)', function (data) {
+            var dateRange = data.field.date_range.split(' - ');
+            var startDate = dateRange[0] ? new Date(dateRange[0]) : null;
+            var endDate = dateRange[1] ? new Date(dateRange[1]) : null;
+            var type = data.field.transaction_type_filter;
+            
+            // 模拟前端筛选
+            $.getJSON('../../api/transactionDetails.json', function(res){
+                var filteredData = res.data.filter(function(item){
+                    var itemDate = new Date(item.date);
+                    var dateMatch = (!startDate || itemDate >= startDate) && (!endDate || itemDate <= endDate);
+                    var typeMatch = (type === "" || item.type === type);
+                    return dateMatch && typeMatch;
+                });
+                transactionTableInstance.reload({ data: filteredData });
+            });
+            return false;
+        });
+
+        // 监听表格操作栏
+        table.on('tool(transactionTableFilter)', function (obj) {
+            var data = obj.data;
+            if (obj.event === 'preview') {
+                layer.open({
+                    type: 1,
+                    title: '凭证预览',
+                    area: ['400px', '400px'],
+                    content: '<div style="text-align:center; padding: 10px;"><img src="images/20250916200004_93_21.jpg" style="max-width:100%;"></div>'
+                });
+            }
+        });
+        
+        // 监听表单提交
+        form.on('submit(incomeSubmit)', function(data){
+             layer.msg('收入记录保存成功', {icon: 1});
+             return false;
+        });
+
+        form.on('submit(expenseSubmit)', function(data){
+             layer.msg('支出记录保存成功', {icon: 1});
+             return false;
+        });
+    });
+</script>
+</body>
+</html>
